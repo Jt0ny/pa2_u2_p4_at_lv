@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.repository.CtaBancariaRepository;
@@ -14,39 +15,34 @@ public class CtaBancariaServiceImpl implements CtaBancariaService {
 	@Autowired
 	private CtaBancariaRepository bancariaRepository;
 	
+	@Autowired
+	@Qualifier("aumenta")
+	private MontoAdicionalService adicionalService;
+	
 	@Override
 	public void aperturar(CtaBancaria ctaBancaria) {
 	this.bancariaRepository.insertar(ctaBancaria);
+	BigDecimal montoAd = this.adicionalService.calcular(ctaBancaria.getSaldo(), ctaBancaria);
 	
-	LocalDate fecha = LocalDate.now();
-	int dia = fecha.getDayOfMonth();
-
-    if (dia % 2 == 0) {
-        System.out.println("El día es par");
-        BigDecimal comision =ctaBancaria.getSaldo().multiply(new BigDecimal(1.05));
-        ctaBancaria.setSaldo(comision);
-      
-    } else {
-        System.out.println("El día es impar no se subira nada");
-    }
 		
 	}
 
 	@Override
-	public void actualizar(CtaBancaria ctaBancaria) {
+	public void actualizar(Integer id) {
 		
-		this.bancariaRepository.actualizar(ctaBancaria);
+		this.bancariaRepository.actualizar(id);
 	}
 
 	@Override
-	public void consultar(String cedula) {
+	public void consultar(Integer id) {
 		// TODO Auto-generated method stub
+		this.bancariaRepository.seleccionar(id);
 		
 	}
 
 	@Override
-	public void eliminar(String cedula) {
-		// TODO Auto-generated method stub
+	public void eliminar(Integer id) {
+		this.bancariaRepository.eliminar(id);
 		
 	}
 

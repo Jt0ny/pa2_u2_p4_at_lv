@@ -24,19 +24,19 @@ public class CtaBancariaRepositoryImpl implements CtaBancariaRepository {
 	}
 
 	@Override
-	public void actualizar(CtaBancaria ctaBancaria) {
-		this.entityManager.merge(ctaBancaria);
+	public void actualizar(Integer id) {
+		this.entityManager.merge(id);
 		
 	}
 
 	@Override
-	public CtaBancaria seleccionar(String cedula) {
-		 return this.entityManager.find(CtaBancaria.class, cedula);
+	public CtaBancaria seleccionar(Integer id) {
+		 return this.entityManager.find(CtaBancaria.class, id);
 	}
 
 	@Override
-	public void eliminar(String cedula) {
-		CtaBancaria ctaB=this.seleccionar(cedula);
+	public void eliminar(Integer id) {
+		CtaBancaria ctaB=this.seleccionar(id);
 		this.entityManager.remove(ctaB);
 		
 	}
