@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.repository.CtaBancariaRepository;
 import com.example.demo.repository.modelo.CtaBancaria;
-@Service()
+@Service("aumenta")
 public class MontoAdicionalAumentaImpl implements MontoAdicionalService {
 	@Autowired
 	private CtaBancariaRepository bancariaRepository;
@@ -16,7 +16,7 @@ public class MontoAdicionalAumentaImpl implements MontoAdicionalService {
 	@Override
 	public BigDecimal calcular(BigDecimal monto,CtaBancaria ctaBancaria) {
 		// TODO Auto-generated method stub
-	        System.out.println("El día es par");
+	       // System.out.println("El día es par");
 	        monto =ctaBancaria.getSaldo().multiply(new BigDecimal(1.05));
 	        ctaBancaria.setSaldo(monto);
 		return monto;
