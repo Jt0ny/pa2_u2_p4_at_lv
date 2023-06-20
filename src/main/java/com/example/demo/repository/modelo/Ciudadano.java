@@ -1,5 +1,6 @@
 package com.example.demo.repository.modelo;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -24,7 +25,8 @@ public class Ciudadano {
 	private String apellido;
 	@Column(name = "ciud_cedula")
 	private String cedula;
-	@OneToOne(mappedBy = "ciudadano")  /// nombre del atributo con el que mapee
+	
+	@OneToOne(mappedBy = "ciudadano",cascade = CascadeType.ALL)  /// nombre del atributo con el que mapee
 	private Empleado empleado;
 	
 	
