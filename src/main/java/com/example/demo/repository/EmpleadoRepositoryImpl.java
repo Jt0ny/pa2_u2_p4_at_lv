@@ -27,14 +27,14 @@ public class EmpleadoRepositoryImpl implements EmpleadoRepository {
 	}
 
 	@Override
-	public Empleado seleccionar(String cedula) {
+	public Empleado seleccionar(Integer id ) {
 	
-		return this.entityManager.find(Empleado.class, cedula);
+		return this.entityManager.find(Empleado.class, id);
 	}
 
 	@Override
-	public void eliminar(String cedula) {
-		Empleado emple=this.seleccionar(cedula);
+	public void eliminar(Integer id ) {
+		Empleado emple=this.seleccionar(id);
 		this.entityManager.remove(emple);
 	}
 

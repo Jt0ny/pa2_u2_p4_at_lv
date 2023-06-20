@@ -6,7 +6,7 @@ public interface EmpleadoRepository {
 	
 	public void insertar (Empleado empleado);
 	public void actualizar (Empleado empleado);
-	public Empleado seleccionar(String cedula);
-	public void eliminar (String cedula);
+	public Empleado seleccionar(Integer id );
+	public void eliminar (Integer id );
 
 }

@@ -1,25 +1,24 @@
 package com.example.demo;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.math.BigDecimal;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.example.demo.repository.modelo.Autor;
-import com.example.demo.repository.modelo.Libro;
-import com.example.demo.service.AutorService;
-import com.example.demo.service.LibroService;
+import com.example.demo.repository.modelo.Ciudadano;
+import com.example.demo.repository.modelo.Empleado;
+import com.example.demo.service.CuidadanoService;
+import com.example.demo.service.EmpleadoService;
 
 @SpringBootApplication
 public class Pa2U2P4AtLvApplication implements CommandLineRunner {
 	
 	@Autowired
-	private LibroService  libroService;
+	private CuidadanoService  cuidadanoService;
 	@Autowired
-	private AutorService autorService ;
+	private EmpleadoService empleadoService ;
 	
 	
 	public static void main(String[] args) {
@@ -28,65 +27,45 @@ public class Pa2U2P4AtLvApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		
-		
-		//AUTORES
-		Autor autor1 = new Autor();
-		autor1.setNombre("Anthony");
-		autor1.setApeliido("Vallades");
-		
-		Autor autor2 = new Autor();
-		autor2.setNombre("Luis");
-		autor2.setApeliido("Vallades");
-
-		Autor autor3 = new Autor();
-		autor3.setNombre("Jhon");
-		autor3.setApeliido("Vallades");
-		
-		
-		Set<Autor> conjuntoAutor= new HashSet<>();
-		conjuntoAutor.add(autor1);
-		conjuntoAutor.add(autor2);
-		conjuntoAutor.add(autor3);
-		
 	
-		//LIBROS
-		Libro libro1 = new Libro();
-		libro1.setTitulo("Caperucita");
-		libro1.setEditorial("Norma");
-	
-		Libro libro2 = new Libro();
-		libro2.setTitulo("XYZ");
-		libro2.setEditorial("Norma");
-
-		Libro libro3 = new Libro();
-		libro3.setTitulo("El principito");
-		libro3.setEditorial("Norma");
+		Ciudadano ciudadano1 = new Ciudadano();
+		ciudadano1.setNombre("Anthony");
+		ciudadano1.setApellido("Tipan");
+		ciudadano1.setCedula("1345");
 		
-		Set<Libro> conjuntoLibros= new HashSet<>();
-		conjuntoLibros.add(libro1);
-		conjuntoLibros.add(libro2);
-		conjuntoLibros.add(libro3);
+		Ciudadano ciudadano2 = new Ciudadano();
+		ciudadano2.setNombre("Luis");
+		ciudadano2.setApellido("xyz");
+		ciudadano2.setCedula("5678");
 		
+		Empleado empleado1 = new Empleado();
+		empleado1.setCargo("Gerente ");
+		empleado1.setSueldo(new BigDecimal(500));
+		empleado1.setCiudadano(ciudadano1);
 		
-		//Agregacion
-		autor1.setLibros(conjuntoLibros);
-		this.autorService.guardar(autor1);
-		
-		libro1.setAutores(conjuntoAutor);
-		this.libroService.guardar(libro1);
-	
+		Empleado empleado2 = new Empleado();
+		empleado2.setCargo("Bodegero ");
+		empleado2.setSueldo(new BigDecimal(500));
+		empleado2.setCiudadano(ciudadano2);
 		
 		
+		ciudadano1.setEmpleado(empleado1);
+		ciudadano2.setEmpleado(empleado2);
+		//this.cuidadanoService.guardar(ciudadano1);
+		this.empleadoService.guardar(empleado1);
+		//this.cuidadanoService.guardar(ciudadano2);
+		this.empleadoService.guardar(empleado2);
 		
 		
+		ciudadano2.setApellido("Valladares");
+		this.cuidadanoService.actualizar(ciudadano2);
 		
+		this.cuidadanoService.buscar(30);
 		
-		
+		this.cuidadanoService.eliminar(30);
 		
 
-		
-		
+			
 	}
 
 }

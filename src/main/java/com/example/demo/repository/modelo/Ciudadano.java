@@ -19,10 +19,13 @@ public class Ciudadano {
 	@Id
 	@Column(name = "ciud_id")
 	private Integer id;
+	
 	@Column(name = "ciud_nombre")
 	private String nombre;
+	
 	@Column(name = "ciud_apellido")
 	private String apellido;
+	
 	@Column(name = "ciud_cedula")
 	private String cedula;
 	

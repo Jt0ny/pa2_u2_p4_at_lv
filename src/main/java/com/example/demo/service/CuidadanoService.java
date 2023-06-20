@@ -6,7 +6,7 @@ public interface CuidadanoService {
 	
 	public void guardar(Ciudadano ciudadano);
 	public void actualizar(Ciudadano ciudadano);
-	public void buscar(String cedula);
-	public void eliminar(String cedula);
+	public Ciudadano buscar(Integer id) ;
+	public void eliminar(Integer id );
 
 }

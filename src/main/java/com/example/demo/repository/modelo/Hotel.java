@@ -2,6 +2,7 @@ package com.example.demo.repository.modelo;
 
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -28,7 +29,7 @@ public class Hotel {
 	private String direccion;
 
 	
-	@OneToMany(mappedBy = "hotel") //>>>>>>>>>  un hotel tiene varias habitaciones 
+	@OneToMany(mappedBy = "hotel",cascade = CascadeType.ALL) //>>>>>>>>>  un hotel tiene varias habitaciones 
 	private List <Habitacion> habitaciones;
 
 

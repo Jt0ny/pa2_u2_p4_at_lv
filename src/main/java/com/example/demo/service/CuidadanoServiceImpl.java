@@ -25,14 +25,14 @@ public class CuidadanoServiceImpl implements CuidadanoService {
 	}
 
 	@Override
-	public void buscar(String cedula) {
-		this.cuidadanoRepository.seleccionar(cedula);
+	public Ciudadano buscar(Integer id ) {
+		 return this.cuidadanoRepository.seleccionar(id);
 		
 	}
 
 	@Override
-	public void eliminar(String cedula) {
-		this.cuidadanoRepository.eliminar(cedula);
+	public void eliminar(Integer id ) {
+		this.cuidadanoRepository.eliminar(id);
 		
 	}
 

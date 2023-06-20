@@ -30,7 +30,7 @@ public class Habitacion {
 	private BigDecimal valor;
 
 
-	@ManyToOne(cascade = CascadeType.ALL) //>>>>>>>>> mmuchas habitaciones tiene un hotel
+	@ManyToOne//(cascade = CascadeType.ALL) //>>>>>>>>> mmuchas habitaciones tiene un hotel
 	@JoinColumn(name = "habi_id_hotel") //para clave foranea
 	private Hotel hotel;
 

@@ -6,7 +6,7 @@ public interface EmpleadoService {
 	
 	public void guardar(Empleado empleado);
 	public void actualizar(Empleado empleado);
-	public void buscar(String cedula);
-	public void eliminar(String cedula);
+	public Empleado buscar(Integer id );
+	public void eliminar(Integer id );
 
 }

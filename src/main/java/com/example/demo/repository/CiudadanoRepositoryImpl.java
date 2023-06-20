@@ -29,15 +29,15 @@ public class CiudadanoRepositoryImpl implements CiudadanoRepository{
 	}
 
 	@Override
-	public Ciudadano seleccionar(String cedula) {
+	public Ciudadano seleccionar(Integer id ) {
 		
-		return this.entityManager.find(Ciudadano.class, cedula);
+		return this.entityManager.find(Ciudadano.class, id);
 	}
 
 	@Override
-	public void eliminar(String cedula) {
-		Ciudadano cuida= this.seleccionar(cedula);
-		this.entityManager.remove(cuida);
+	public void eliminar(Integer id ) {
+		Ciudadano ciuda= this.seleccionar(id);
+		this.entityManager.remove(ciuda);
 		
 	}
 

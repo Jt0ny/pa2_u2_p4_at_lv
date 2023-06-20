@@ -26,13 +26,13 @@ public class EmpleadoServiceImpl implements EmpleadoService{
 	}
 
 	@Override
-	public void buscar(String cedula) {
-	this.empleadoRepository.seleccionar(cedula);
+	public Empleado buscar(Integer id ) {
+	return this.empleadoRepository.seleccionar(id);
 	}
 
 	@Override
-	public void eliminar(String cedula) {
-	this.empleadoRepository.eliminar(cedula);
+	public void eliminar(Integer id ) {
+	this.empleadoRepository.eliminar(id);
 		
 	}
 
