@@ -73,7 +73,7 @@ public class EstudianteRepositoryImpl implements EstudianteRepository {
 //TypedQuery
 	@Override
 	public Estudiante seleccionarPorApellidoTyped(String apellido) {
-		TypedQuery<Estudiante> myQuery=this.entityManager.createNamedQuery("select e from Estudiante e where e.apellido = :datoApellido", Estudiante.class);
+		TypedQuery<Estudiante> myQuery=this.entityManager.createQuery("select e from Estudiante e where e.apellido = :datoApellido", Estudiante.class);
 		myQuery.setParameter("datoApellido",apellido);
 		return myQuery.getSingleResult();// aqui no pide el cast
 	}
