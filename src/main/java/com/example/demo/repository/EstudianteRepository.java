@@ -18,7 +18,7 @@ public interface EstudianteRepository {
 	
 	public Estudiante seleccionarPorApellidoTyped(String apellido);
 	
-	
+	public Estudiante seleccionarPorApellidoNamed(String apellido);
 	
 	
 

@@ -78,4 +78,11 @@ public class EstudianteRepositoryImpl implements EstudianteRepository {
 		return myQuery.getSingleResult();// aqui no pide el cast
 	}
 
+	@Override
+	public Estudiante seleccionarPorApellidoNamed(String apellido) {
+		TypedQuery<Estudiante> myQuery=	this.entityManager.createNamedQuery("Estudiante.buscaPorApellido",Estudiante.class);
+		myQuery.setParameter("datoApellido",apellido);
+		return myQuery.getSingleResult();
+	}
+
 }
