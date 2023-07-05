@@ -151,6 +151,65 @@ public class EstudianteRepositoryImpl implements EstudianteRepository {
 		
 		return myQueryFinal.getSingleResult();
 	}
+
+	@Override
+	public Estudiante seleccionarEstudianteDinamico(String nombre, String apellido, Double peso) {
+		CriteriaBuilder myBuilder=this.entityManager.getCriteriaBuilder();
+		//1.Especificar el tipo de retorno que tiene la query
+		CriteriaQuery<Estudiante> myCriteriaQuery=myBuilder.createQuery(Estudiante.class);
+		
+		//2.Empezamos a crear el sql
+		//2.1 Definimos el from(Root)el from se le conoce como root
+		Root<Estudiante> miTablaFrom=myCriteriaQuery.from(Estudiante.class);//From estudiante
+		
+		//3. Construir las condiciones de mi sql (Las conodiciones se les conoce como predicados)
+		//peso >100 e.nombre=.... and e.apeliido=...
+		//peso <=100 e.nombre= OR e.apellido=?
+		
+		//e.nombre
+		Predicate pNombre=myBuilder.equal(miTablaFrom.get("nombre"), nombre);
+		
+		//e.apellido
+		Predicate pApellido=myBuilder.equal(miTablaFrom.get("apellido"), apellido);
+		
+		Predicate predicadoFinal=null;
+		if(peso.compareTo(Double.valueOf(100))<=0) {
+			predicadoFinal=myBuilder.or(pNombre,pApellido);
+		}else {
+			predicadoFinal=myBuilder.and(pNombre,pApellido);
+		}
+		//4.Armamos mi sql final 
+		myCriteriaQuery.select(miTablaFrom).where(predicadoFinal);
+				
+		//5.Ejecucion de Query lo realizamos con TypedQuery 
+		TypedQuery<Estudiante>myQueryFinal=this.entityManager.createQuery(myCriteriaQuery);
+				
+				
+				return myQueryFinal.getSingleResult();
+	}
+
+	@Override
+	public int eliminarPorNombre(String nombre) {
+		// DELETE FROM estudiante WHERE estu_nombre=?
+		//delete from Estudiante e where e.nombre=:datoNombre
+		Query myQuery=this.entityManager.createQuery("DELETE FROM Estudiante e where e.nombre= :datoNombre");
+		myQuery.setParameter("datoNombre", nombre);
+		return myQuery.executeUpdate();
+		
+	}
+
+	@Override
+	public int actualizarPorApellido(String nombre,String apellido) {
+		//SQL
+		//UPDATE estudiante SET estu_apellido=? WHERE estu_apellido=?
+		//JPQL
+		//UPDATE Estudiante e SET e.nombre=:datoNombre WHERE e.apellido=:datoApellido
+		Query myQuery=this.entityManager.createQuery("UPDATE Estudiante e SET e.nombre=:datoNombre WHERE e.apellido=:datoApellido");
+		myQuery.setParameter("datoNombre", nombre);
+		myQuery.setParameter("datoApellido", apellido);
+		return myQuery.executeUpdate();
+
+	}
 	
 	
 

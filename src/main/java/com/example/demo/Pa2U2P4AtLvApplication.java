@@ -8,6 +8,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.example.demo.repository.modelo.Celular;
+import com.example.demo.repository.modelo.Estudiante;
 import com.example.demo.service.CelularService;
 import com.example.demo.service.EstudianteService;
 
@@ -26,22 +27,25 @@ public class Pa2U2P4AtLvApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		
 		
-		/*System.out.println("Named");
-		this.estudianteService.buscarPorApellidoNamed("Valladares");
+		/*Estudiante estu1=new Estudiante();
+		estu1.setApellido("Ramos");
+		estu1.setNombre("Felipa");
+		estu1.setPeso(78.0);
+		estu1.setCedula("123");
+		this.estudianteService.guardar(estu1);
 		
-		System.out.println("NamedQuery");
-		this.estudianteService.buscarPorApellidoNamedQuery("Valladares");
+		Estudiante estu2=new Estudiante();
+		estu2.setApellido("Oña");
+		estu2.setNombre("Omar");
+		estu2.setPeso(120.0);
+		estu2.setCedula("456");
+		this.estudianteService.guardar(estu2);*/
 		
+		System.out.println(this.estudianteService.buscarEstudianteDinamico("Felipa", "Ramos", 78.0));
 
-		System.out.println("Native");
-		this.estudianteService.buscarPorApellidoNative("Valladares");*/
-		
-		System.out.println("NativeNamed");
-		this.estudianteService.buscarPorApellidoNativeQueryNamed("Valladares");
-		
-		System.out.println("Por nombre");
-		this.estudianteService.buscarPorNombreNamedQuery("Luis");
-		this.estudianteService.buscarPorNombreNativeQueryNamed("Luis");
+		System.out.println(this.estudianteService.eliminarPorNombre("Anthony"));
+
+		System.out.println(this.estudianteService.actualizarPorApellido("Felipa", "Ramos"));
 
 
 		
