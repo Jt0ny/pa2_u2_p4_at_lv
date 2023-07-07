@@ -38,35 +38,11 @@ public class CelularServiceImpl implements CelularService {
 		this.celularRepository.eliminar(id);
 	}
 
-	//Querys
 	@Override
-	public Celular buscarPorModelo(String modelo) {
+	public List<Celular> buscarCelularDinamico(String marca, BigDecimal precio, String modelo) {
 		
-		return this.celularRepository.seleccionarPorModelo(modelo);
+		return this.celularRepository.seleccionarCelularDinamico(marca, precio, modelo);
 	}
 
-	@Override
-	public List<Celular> buscarPorMarca(String marca) {
-		
-		return this.celularRepository.seleccionarPorMarca(marca);
-	}
-
-	@Override
-	public Celular buscarPorMarcayPrecio(String marca, BigDecimal precio) {
 	
-		return this.celularRepository.seleccionarPorMarcayPrecio(marca, precio);
-	}
-
-	@Override
-	public Celular buscarPorModeloTyped(String modelo) {
-		
-		return this.celularRepository.seleccionarPorModeloTyped(modelo);
-	}
-
-	@Override
-	public List<Celular> buscarPorMarcaTyped(String marca) {
-		
-		return this.celularRepository.seleccionarPorMarcaTyped(marca);
-	}
-
 }

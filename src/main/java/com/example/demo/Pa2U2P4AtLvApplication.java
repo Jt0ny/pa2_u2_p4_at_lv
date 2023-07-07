@@ -8,15 +8,13 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.example.demo.repository.modelo.Celular;
-import com.example.demo.repository.modelo.Estudiante;
 import com.example.demo.service.CelularService;
-import com.example.demo.service.EstudianteService;
 
 @SpringBootApplication
 public class Pa2U2P4AtLvApplication implements CommandLineRunner {
 	
 	@Autowired
-	private EstudianteService estudianteService;
+	private CelularService celularService;
 	
 	
 	public static void main(String[] args) {
@@ -27,25 +25,39 @@ public class Pa2U2P4AtLvApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		
 		
-		/*Estudiante estu1=new Estudiante();
-		estu1.setApellido("Ramos");
-		estu1.setNombre("Felipa");
-		estu1.setPeso(78.0);
-		estu1.setCedula("123");
-		this.estudianteService.guardar(estu1);
+		Celular c1= new Celular ();
+		c1.setMarca("Samsung");
+		c1.setModelo("A10");
+		c1.setPrecio(new BigDecimal(90));
+		this.celularService.guardar(c1);
 		
-		Estudiante estu2=new Estudiante();
-		estu2.setApellido("Oña");
-		estu2.setNombre("Omar");
-		estu2.setPeso(120.0);
-		estu2.setCedula("456");
-		this.estudianteService.guardar(estu2);*/
+		Celular c2= new Celular ();
+		c2.setMarca("Samsung");
+		c2.setModelo("S23 ultra");
+		c2.setPrecio(new BigDecimal(230));
+		this.celularService.guardar(c2);
 		
-		System.out.println(this.estudianteService.buscarEstudianteDinamico("Felipa", "Ramos", 78.0));
-
-		System.out.println(this.estudianteService.eliminarPorNombre("Anthony"));
-
-		System.out.println(this.estudianteService.actualizarPorApellido("Felipa", "Ramos"));
+		Celular c3= new Celular ();
+		c3.setMarca("Huawei");
+		c3.setModelo("Y9");
+		c3.setPrecio(new BigDecimal(150));
+		this.celularService.guardar(c3);
+		
+		Celular c4= new Celular ();
+		c4.setMarca("Huawei");
+		c4.setModelo("P20 lite");
+		c4.setPrecio(new BigDecimal(200));
+		this.celularService.guardar(c4);
+		
+		Celular c5= new Celular ();
+		c5.setMarca("Xiaomi");
+		c5.setModelo("Redmi");
+		c5.setPrecio(new BigDecimal(390));
+		this.celularService.guardar(c5);
+		
+		System.out.println(this.celularService.buscarCelularDinamico("Samsung", new BigDecimal(100), "Redmi"));
+		
+		
 
 
 		

@@ -4,13 +4,14 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
-
 import com.example.demo.repository.modelo.Celular;
-
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.Root;
 import jakarta.transaction.Transactional;
 
 @Repository
@@ -42,41 +43,34 @@ public class CelularRepositoryImpl  implements CelularRepository{
 		this.entityManager.remove(celu);	
 	}
 
-	// Querys
 	@Override
-	public Celular seleccionarPorModelo(String modelo) {
-		Query myQuery = this.entityManager.createQuery("select e from Celular e where e.modelo = :datoModelo");
-		myQuery.setParameter("datoModelo", modelo);
-		return (Celular) myQuery.getSingleResult();
-	}
-
-	@Override
-	public List<Celular> seleccionarPorMarca(String marca) {
-		Query myQuery=this.entityManager.createQuery("select e from Celular e where e.marca = :datoMarca");
-		myQuery.setParameter("datoMarca",marca);
-		return myQuery.getResultList();
-	}
-
-	@Override
-	public Celular seleccionarPorMarcayPrecio(String marca, BigDecimal precio) {
-		Query myQuery=this.entityManager.createQuery("select e from Celular e where e.marca = :datoMarca and e.precio=:datoPrecio");
-		myQuery.setParameter("datoMarca",marca);
-		myQuery.setParameter("datoPrecio",precio);
-		return (Celular) myQuery.getSingleResult();
-	}
-
-	@Override
-	public Celular seleccionarPorModeloTyped(String modelo) {
-		TypedQuery<Celular> myQuery=this.entityManager.createQuery("select e from Celular e where e.modelo = :datoModelo",Celular.class);
-		myQuery.setParameter("datoModelo", modelo);
-		return myQuery.getSingleResult();
-	}
-
-	@Override
-	public List<Celular> seleccionarPorMarcaTyped(String marca) {
-		Query myQuery=this.entityManager.createQuery("select e from Celular e where e.marca = :datoMarca",Celular.class);
-		myQuery.setParameter("datoMarca",marca);
-		return myQuery.getResultList();
+	public List<Celular> seleccionarCelularDinamico(String marca, BigDecimal precio, String modelo) {
+	
+		CriteriaBuilder myBuilder=this.entityManager.getCriteriaBuilder();
+		
+		CriteriaQuery<Celular> myCriteriaQuery=myBuilder.createQuery(Celular.class);//Tipo de retorno
+		
+		Root<Celular> miTablaFrom=myCriteriaQuery.from(Celular.class);// definimos from celular
+		
+		//precio <=200 e.marca=.. or e.modelo
+		//precio >200 e.marca and e.modelo
+		
+		//e.marca
+		Predicate pMarca=myBuilder.equal(miTablaFrom.get("marca"), marca);
+		
+		//e.modelo
+		Predicate pModelo=myBuilder.equal(miTablaFrom.get("modelo"), modelo);
+		
+		Predicate predicadoFinal=null;
+		if(precio.compareTo(new BigDecimal(200))<0) {
+			predicadoFinal=myBuilder.or(pMarca,pModelo);
+		}else {
+			predicadoFinal=myBuilder.and(pMarca,pModelo);
+		}
+		
+		myCriteriaQuery.select(miTablaFrom).where(predicadoFinal);// SQL final
+		TypedQuery<Celular>myQueryFinal=this.entityManager.createQuery(myCriteriaQuery);
+		return  myQueryFinal.getResultList();
 	}
 
 }
