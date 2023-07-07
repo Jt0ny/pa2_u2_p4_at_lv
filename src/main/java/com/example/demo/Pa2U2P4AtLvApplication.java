@@ -25,7 +25,7 @@ public class Pa2U2P4AtLvApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		
 		
-		Celular c1= new Celular ();
+		/*Celular c1= new Celular ();
 		c1.setMarca("Samsung");
 		c1.setModelo("A10");
 		c1.setPrecio(new BigDecimal(90));
@@ -53,9 +53,13 @@ public class Pa2U2P4AtLvApplication implements CommandLineRunner {
 		c5.setMarca("Xiaomi");
 		c5.setModelo("Redmi");
 		c5.setPrecio(new BigDecimal(390));
-		this.celularService.guardar(c5);
+		this.celularService.guardar(c5);*/
 		
-		System.out.println(this.celularService.buscarCelularDinamico("Samsung", new BigDecimal(100), "Redmi"));
+		//System.out.println(this.celularService.buscarCelularDinamico("Samsung", new BigDecimal(100), "Redmi"));
+		System.out.println(this.celularService.actualizarPorMarca("Huawei", "Motorola"));
+		
+		System.out.println(this.celularService.borrarPorModelo("Y9"));
+		
 		
 		
 

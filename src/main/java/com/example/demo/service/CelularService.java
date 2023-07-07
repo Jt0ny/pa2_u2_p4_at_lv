@@ -12,7 +12,13 @@ public interface CelularService {
 	public Celular buscar (Integer id);
 	public void eliminar (Integer id);
 	
+	
+	
 	public List<Celular>buscarCelularDinamico(String marca,BigDecimal precio, String modelo);
+	
+	public int borrarPorModelo(String modelo);
+	
+	public int actualizarPorMarca(String marca ,String marcaNueva);
 	
 
 }

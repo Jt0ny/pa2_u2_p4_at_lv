@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import com.example.demo.repository.modelo.Celular;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
@@ -72,5 +73,25 @@ public class CelularRepositoryImpl  implements CelularRepository{
 		TypedQuery<Celular>myQueryFinal=this.entityManager.createQuery(myCriteriaQuery);
 		return  myQueryFinal.getResultList();
 	}
+
+	@Override
+	public int eliminarPorModelo(String modelo) {
+		
+		Query myQuery=this.entityManager.createQuery("DELETE FROM Celular e where e.modelo= :datoModelo");
+		myQuery.setParameter("datoModelo", modelo);
+		return myQuery.executeUpdate();
+		
+	}
+
+	@Override
+	public int actualizarPorMarca(String marca, String marcaNueva) {
+		
+		Query myQuery=this.entityManager.createQuery("UPDATE Celular e SET e.marca=:datoNuevoM WHERE e.marca=:datoMarca");
+		myQuery.setParameter("datoMarca", marca);
+		myQuery.setParameter("datoNuevoM", marcaNueva);
+		return myQuery.executeUpdate();
+	}
+
+
 
 }

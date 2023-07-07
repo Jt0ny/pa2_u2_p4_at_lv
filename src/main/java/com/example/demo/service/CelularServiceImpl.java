@@ -45,4 +45,17 @@ public class CelularServiceImpl implements CelularService {
 	}
 
 	
+	@Override
+	public int borrarPorModelo(String modelo) {
+		
+		return this.celularRepository.eliminarPorModelo(modelo);
+	}
+
+	@Override
+	public int actualizarPorMarca(String marca, String marcaNueva) {
+		
+		return this.celularRepository.actualizarPorMarca(marca, marcaNueva);
+	}
+
+	
 }

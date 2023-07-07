@@ -12,7 +12,12 @@ public interface CelularRepository {
 	public Celular seleccionar (Integer id);
 	public void eliminar (Integer id);
 	
+	
 	public List<Celular> seleccionarCelularDinamico(String marca,BigDecimal precio, String modelo);
+	
+	public int eliminarPorModelo(String modelo);
+	
+	public int actualizarPorMarca(String marca,String marcaNueva);
 	
 
 }
