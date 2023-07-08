@@ -1,9 +1,12 @@
 package com.example.demo.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.repository.HotelRepository;
+import com.example.demo.repository.modelo.Habitacion;
 import com.example.demo.repository.modelo.Hotel;
 
 @Service
@@ -34,6 +37,12 @@ public class HotelServiceImpl implements HotelService{
 	public void eliminar(Integer id ) {
 		this.hotelRepository.eliminar(id);
 		
+	}
+
+	@Override
+	public List<Habitacion> seleccionarHabitaciones(String nombrehotel) {
+		
+		return this.hotelRepository.seleccionarHabitaciones(nombrehotel);
 	}
 
 }

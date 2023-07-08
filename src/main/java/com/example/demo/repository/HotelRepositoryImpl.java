@@ -1,11 +1,15 @@
 package com.example.demo.repository;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
+import com.example.demo.repository.modelo.Habitacion;
 import com.example.demo.repository.modelo.Hotel;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.Query;
 import jakarta.transaction.Transactional;
 
 @Transactional
@@ -37,6 +41,18 @@ public class HotelRepositoryImpl implements HotelRepository {
 	public void eliminar(Integer id ) {
 		Hotel hote = this.seleccionar(id);
 		this.entityManager.remove(hote);
+		
+	}
+
+	@Override
+	public List<Habitacion> seleccionarHabitaciones(String nombrehotel) {
+		
+	Query myQuery=this.entityManager.createQuery("select e from Hotel.habitacion e where e.nombre = :datoNombre");// el de los 2 puntos es un atributo
+
+    myQuery.setParameter("datoNombre",nombrehotel);
+
+     	return myQuery.getResultList();
+      
 		
 	}
 

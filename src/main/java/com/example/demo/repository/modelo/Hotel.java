@@ -5,6 +5,7 @@ import java.util.List;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -29,7 +30,7 @@ public class Hotel {
 	private String direccion;
 
 	
-	@OneToMany(mappedBy = "hotel",cascade = CascadeType.ALL) //>>>>>>>>>  un hotel tiene varias habitaciones 
+	@OneToMany(mappedBy = "hotel",cascade = CascadeType.ALL,fetch = FetchType.LAZY) //>>>>>>>>>  un hotel tiene varias habitaciones 
 	private List <Habitacion> habitaciones;
 
 
